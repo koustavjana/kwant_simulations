@@ -1,5 +1,5 @@
 import kwant
-from math import pi,sqrt
+from math import pi,sqrt,tanh
 import numpy as np
 from matplotlib import pyplot
 from kwant.digest import uniform
@@ -10,13 +10,17 @@ graphene = kwant.lattice.general([(1, 0), (sin_30, cos_30)],
 								 [(0, 0), (0, 1 / sqrt(3)), (0, 1 / sqrt(3)), (0, 2 / sqrt(3))])
 aL,bL,aU,bU = graphene.sublattices
 
+# def lin0(y,W,jw) :
+# 	if y < -jw :
+# 		return -1 
+# 	elif -jw <= y < jw :
+# 		return y/jw
+# 	else :
+# 		return 1
+
 def lin0(y,W,jw) :
-	if y < -jw :
-		return -1 
-	elif -jw <= y < jw :
-		return y/jw
-	else :
-		return 1
+	return tanh((y)/(jw/2))
+
 
 def make_system(W = 10*sqrt(3), L = 10, delta = 0, t = 1.6, tl = 0.8) :
 	def channel(pos):
