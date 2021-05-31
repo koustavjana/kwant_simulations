@@ -28,8 +28,8 @@ t = 1.6
 tl = 0.8
 E = 0.5
 U = E
-delta = -0.2
-U_disorder = 6*delta
+delta = 0.2
+U_disorder = 0*delta
 params = dict(U = U, U_disorder = U_disorder)
 
 syst, leads, dum_lead = blg.make_system(W = W, L = L, delta = delta, t = t, tl = tl)
@@ -92,7 +92,7 @@ valley_trans_data = np.zeros((num_U,3))
 valley_trans_data[:,0] = E-Uarr
 valley_trans_data[:,1] = np.array(datan)
 valley_trans_data[:,2] = np.array(datap)
-np.savetxt('valley_blg_disorder_6.csv',valley_trans_data,delimiter=',')
+# np.savetxt('valley_blg_disorder_6.csv',valley_trans_data,delimiter=',')
 
 pyplot.figure()
 pyplot.plot(E-Uarr, data)

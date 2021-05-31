@@ -29,8 +29,13 @@ E = 0.5
 U = E
 lambda_so = 0.2
 delta = -lambda_so
-U_disorder = 6*delta
-params = dict(U = U, U_disorder = U_disorder, Mex = 0)
+U_disorder = 0*delta
+Px = 0
+Py = 0
+Pz = 0
+
+
+params = dict(U = U, U_disorder = U_disorder, Mex = 0, Px = Px, Py = Py, Pz = Pz)
 
 
 syst, leads, dum_lead = silicene.make_system(W = W, L = L, delta = delta, t = t, lambda_so = lambda_so)
@@ -64,7 +69,8 @@ syst = syst.finalized()
 
 local_dos = kwant.ldos(syst,energy=E,params=params)
 # kwant.plotter.map(syst, local_dos[1::2], num_lead_cells=0, a=1/sqrt(3))
-kwant.plotter.density(syst, local_dos[1::2])
+kwant.plotter.density(syst, local_dos[1::2], vmax=0.2)
+# raise Exception()
 
 def compute_Pv(smatrix) :     
 	mat = smatrix.submatrix(0,1)
@@ -81,7 +87,7 @@ num_U = 50
 Uarr = np.linspace(-np.abs(delta*1.5),np.abs(delta*1.5),num_U) + E
 data, datan, datap = [], [], []
 for U in Uarr :
-	params = dict(U = U, U_disorder = U_disorder, Mex = 0)
+	params = dict(U = U, U_disorder = U_disorder, Mex = 0, Px = Px, Py = Py, Pz = Pz)
 	smatrix = kwant.smatrix(syst,energy=E,params=params)
 	datapoint = compute_Pv(smatrix)
 	print(E-U," ",datapoint)
@@ -93,7 +99,7 @@ valley_trans_data = np.zeros((num_U,3))
 valley_trans_data[:,0] = E-Uarr
 valley_trans_data[:,1] = np.array(datan)
 valley_trans_data[:,2] = np.array(datap)
-np.savetxt('valley_silicene1_disorder_6.csv',valley_trans_data,delimiter=',')
+np.savetxt('silicene0_disorder_0_0_1.csv',valley_trans_data,delimiter=',')
 
 pyplot.figure()
 pyplot.plot(E-Uarr, data)

@@ -6,6 +6,9 @@ from kwant.digest import uniform
 from types import SimpleNamespace
 
 pauli_z = np.array([[1,0],[0,-1]])
+pauli_x = np.array([[0,1],[1,0]])
+pauli_y = np.array([[0,-1j],[1j,0]])
+
 sin_30, cos_30 = (1 / 2, sqrt(3) / 2)
 graphene = kwant.lattice.general([(1, 0), (sin_30, cos_30)],
 								 [(0, 0), (0, 1 / sqrt(3))])
@@ -57,9 +60,9 @@ def make_system(W = 10*sqrt(3), L = 10, delta = 0, t = 1.6, lambda_so = 0) :
 
 	syst = kwant.Builder()
 	
-	del_fn = lambda y,W : lin1(y,W,W/20)  	
+	del_fn = lambda y,W : lin0(y,W,W/20)  	
 	
-	def potential(site, U, U_disorder, Mex):
+	def potential(site, U, U_disorder, Mex, Px, Py, Pz):
 		(x, y) = site.pos
 		salt = 0
 		d = -1
@@ -68,7 +71,7 @@ def make_system(W = 10*sqrt(3), L = 10, delta = 0, t = 1.6, lambda_so = 0) :
 		term1 = d*delta*del_fn(y,W)*np.eye(2)
 		term2 = U*np.eye(2)
 		term3 = Mex*pauli_z
-		term4 = U_disorder * (uniform(repr(site), repr(salt)) - 0.5) * np.eye(2)
+		term4 = U_disorder * (uniform(repr(site), repr(salt)) - 0.5) * (np.eye(2)+Pz*pauli_z+Px*pauli_x+Py*pauli_y)
 		return term1 + term2 + term3 + term4
 
 
