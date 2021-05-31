@@ -31,7 +31,7 @@ def make_system(W = 10*sqrt(3), L = 10, delta = 0, t = 1.6, tl = 0.8) :
 		(x, y) = site.pos
 		salt = 0
 		d = -1
-		if (site.family == aL) or (site.family == aU) :
+		if (site.family == bU) or (site.family == aU) :
 			d = 1
 		term1 = d*delta*del_fn(y,W)
 		term2 = U
@@ -41,7 +41,7 @@ def make_system(W = 10*sqrt(3), L = 10, delta = 0, t = 1.6, tl = 0.8) :
 	def dummy(site):
 		(x, y) = site.pos
 		d = -1
-		if (site.family == aL) or (site.family == aU) :
+		if (site.family == bU) or (site.family == aU) :
 			d = 1
 		term1 = d*delta*del_fn(y,W)
 		return term1 
