@@ -35,7 +35,7 @@ params = dict(U = U, U_disorder = U_disorder)
 syst, leads, dum_lead = blg.make_system(W = W, L = L, delta = delta, t = t, tl = tl)
 
 def family_colors(site):
-	return 0 if (site.family == blg.aL) or (site.family == blg.aU) else 1
+	return 0 if (site.family == blg.aL) or (site.family == blg.bL) else 1
 # Plot the closed system without leads.
 kwant.plot(syst, site_color=family_colors, site_lw=0.1, colorbar=False)
 
@@ -62,8 +62,8 @@ syst = syst.finalized()
 
 
 local_dos = kwant.ldos(syst,energy=E,params = params)
-# kwant.plotter.map(syst, local_dos, num_lead_cells=0, a=1/sqrt(3))
-kwant.plotter.density(syst, local_dos)
+kwant.plotter.map(syst, local_dos, num_lead_cells=0, a=1/sqrt(3))
+# kwant.plotter.density(syst, local_dos)
 
 def compute_Pv(smatrix) :     
 	mat = smatrix.submatrix(0,1)

@@ -1,5 +1,5 @@
 import kwant
-from math import pi,sqrt
+from math import pi,sqrt,tanh
 import numpy as np
 from matplotlib import pyplot
 from kwant.digest import uniform
@@ -15,13 +15,17 @@ graphene = kwant.lattice.general([(1, 0), (sin_30, cos_30)],
 
 a, b = graphene.sublattices
 
+# def lin0(y,W,jw) :
+# 	if y < -jw :
+# 		return -2 
+# 	elif -jw <= y < jw :
+# 		return 2*y/jw
+# 	else :
+# 		return 2
+
 def lin0(y,W,jw) :
-	if y < -jw :
-		return -2 
-	elif -jw <= y < jw :
-		return 2*y/jw
-	else :
-		return 2
+	return 2*tanh((y)/(jw/2))
+
 
 def lin1(y,W,jw) :
 	if y < -W/6-jw :

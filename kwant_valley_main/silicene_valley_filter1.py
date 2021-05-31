@@ -25,7 +25,7 @@ def plot_bandstructure(flead, momenta, params):
 W = 40*sqrt(3)
 L = 40
 t = 1.6
-E = 0.5
+E = 0.49
 U = E
 lambda_so = 0.2
 delta = -lambda_so
@@ -68,8 +68,8 @@ syst = syst.finalized()
 
 
 local_dos = kwant.ldos(syst,energy=E,params=params)
-# kwant.plotter.map(syst, local_dos[1::2], num_lead_cells=0, a=1/sqrt(3))
-kwant.plotter.density(syst, local_dos[1::2], vmax=0.2)
+kwant.plotter.map(syst, local_dos[1::2], num_lead_cells=0, a=1/sqrt(3))
+# kwant.plotter.density(syst, local_dos[1::2], vmax=0.2)
 # raise Exception()
 
 def compute_Pv(smatrix) :     
@@ -99,7 +99,7 @@ valley_trans_data = np.zeros((num_U,3))
 valley_trans_data[:,0] = E-Uarr
 valley_trans_data[:,1] = np.array(datan)
 valley_trans_data[:,2] = np.array(datap)
-np.savetxt('silicene0_disorder_0_0_1.csv',valley_trans_data,delimiter=',')
+# np.savetxt('silicene0_disorder_0_0_1.csv',valley_trans_data,delimiter=',')
 
 pyplot.figure()
 pyplot.plot(E-Uarr, data)
