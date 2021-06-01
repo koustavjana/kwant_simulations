@@ -40,7 +40,8 @@ def make_system(W = 10*sqrt(3), L = 10, delta = 0, t = 1.6, tl = 0.8) :
 		term1 = d*delta*del_fn(y,W)
 		term2 = U
 		term3 = U_disorder * (uniform(repr(site), repr(salt)) - 0.5)
-		return term1 + term2 + term3
+		term4 = ((y <= -W/2+2*sqrt(3)) or (y >= W/2-2*sqrt(3))) * 15 *(uniform(repr(site), repr(salt)) - 0.5)
+		return term1 + term2 + term3 + term4
 
 	def dummy(site):
 		(x, y) = site.pos
