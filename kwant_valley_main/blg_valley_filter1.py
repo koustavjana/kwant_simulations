@@ -43,12 +43,12 @@ ham = syst.finalized().hamiltonian_submatrix(params = params)
 
 
 # Compute the band structure of dum_lead.
-num_momenta = 100
+num_momenta = 200
 momenta = np.linspace(0,2*pi,num_momenta)
 band_data = np.zeros((num_momenta,1+int(W*8/sqrt(3))))
 band_data[:,0] = momenta
 band_data[:,1:] = plot_bandstructure(dum_lead.finalized(), momenta)
-# np.savetxt('blg_band.csv',band_data,delimiter=',')
+np.savetxt('blg_band_d20.csv',band_data,delimiter=',')
 # plot_bandstructure(leads[1].finalized(), momenta)
 
 # Attach the leads to the system.
@@ -92,7 +92,7 @@ valley_trans_data = np.zeros((num_U,3))
 valley_trans_data[:,0] = E-Uarr
 valley_trans_data[:,1] = np.array(datan)
 valley_trans_data[:,2] = np.array(datap)
-# np.savetxt('valley_blg_disorder_6.csv',valley_trans_data,delimiter=',')
+np.savetxt('valley_blg_d20_disorder_0.csv',valley_trans_data,delimiter=',')
 
 pyplot.figure()
 pyplot.plot(E-Uarr, data)
