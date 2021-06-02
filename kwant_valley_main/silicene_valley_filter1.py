@@ -99,7 +99,7 @@ valley_trans_data = np.zeros((num_U,3))
 valley_trans_data[:,0] = E-Uarr
 valley_trans_data[:,1] = np.array(datan)
 valley_trans_data[:,2] = np.array(datap)
-np.savetxt('valley_silicene_d20_l40_disorder_0.csv',band_data,delimiter=',') 
+np.savetxt('valley_silicene_d20_l40_disorder_0.csv',valley_trans_data,delimiter=',') 
 
 pyplot.figure()
 pyplot.plot(E-Uarr, data)
